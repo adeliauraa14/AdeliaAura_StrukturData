@@ -1,34 +1,42 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
     int n;
-    int tinggi[100];
-
-    cout << "Masukkan jumlah siswa: ";
+    cout << "=== Program Pengurutan Durasi Film (Insertion Sort) ===" << endl;
+    cout << "Masukkan jumlah film: ";
     cin >> n;
 
-    cout << "Masukkan tinggi badan siswa (dalam cm):" << endl;
+    string judul[n];
+    int durasi[n];
+
     for (int i = 0; i < n; i++) {
-        cin >> tinggi[i];
+        cout << "\nJudul film ke-" << i + 1 << ": ";
+        cin.ignore(); 
+        getline(cin, judul[i]);
+        cout << "Durasi film (menit): ";
+        cin >> durasi[i];
     }
 
-    // Proses Insertion Sort
     for (int i = 1; i < n; i++) {
-        int temp = tinggi[i];
+        int keyDurasi = durasi[i];
+        string keyJudul = judul[i];
         int j = i - 1;
-        while (j >= 0 && tinggi[j] > temp) {
-            tinggi[j + 1] = tinggi[j];
+
+        while (j >= 0 && durasi[j] > keyDurasi) {
+            durasi[j + 1] = durasi[j];
+            judul[j + 1] = judul[j];
             j--;
         }
-        tinggi[j + 1] = temp;
+        durasi[j + 1] = keyDurasi;
+        judul[j + 1] = keyJudul;
     }
 
-    cout << "\nTinggi badan siswa setelah diurutkan (dari terpendek ke tertinggi): ";
+    cout << "\n Daftar film berdasarkan durasi (terpendek ke terpanjang):" << endl;
     for (int i = 0; i < n; i++) {
-        cout << tinggi[i] << " ";
+        cout << i + 1 << ". " << judul[i] << " - " << durasi[i] << " menit" << endl;
     }
-    cout << "cm" << endl;
 
     return 0;
 }
